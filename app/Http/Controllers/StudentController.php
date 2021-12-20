@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class StudentController extends Controller
 {
@@ -13,7 +14,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $students = Student::all();
+
+        return view('home' , ['students' => $students]);
     }
 
     /**
@@ -29,7 +32,7 @@ class StudentController extends Controller
         $student->marks = $request->marks;
 
         $student->save();
-        
+        return redirect(route('index'))->with('status' , 'Student Inserted');
     }
 
     /**
