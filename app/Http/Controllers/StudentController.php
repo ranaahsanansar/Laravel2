@@ -14,7 +14,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        $students = Student::paginate(7);
 
         return view('home' , ['students' => $students]);
     }
@@ -65,7 +65,8 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = Student::find($id);
+        return view('edit' , ['student'=>$student]);
     }
 
     /**
@@ -77,7 +78,13 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $student = Student::find($id);
+        $student->name = $request->name;
+        $student->city = $request->city;
+        $student->marks = $request->marks;
+
+        $student->save();
+        return redirect(route('index'))->with('status' , 'Student Updated');
     }
 
     /**
@@ -88,6 +95,8 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Student::destroy($id);
+        return redirect(route('index'))->with('status' , 'Student Deleted');
+
     }
 }

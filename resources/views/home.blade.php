@@ -28,6 +28,14 @@
             text-align: center;
         }
 
+        body > div:nth-child(3) > div > div:nth-child(2) > nav > div.hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between > div:nth-child(2) {
+            display: none;
+        }
+
+        body > div:nth-child(3) > div > div:nth-child(2) > nav > div.hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between > div:nth-child(1) {
+            margin-top: 10px;
+        }
+
     </style>
 </head>
 
@@ -113,14 +121,15 @@
                                     <td>{{ $stu->city }}</td>
                                     <td>{{ $stu->marks }}</td>
                                     <td>
-                                        <a href="" class="btn btn-info btn-sm">Edit</a>
-                                        <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                        <a href="{{ url('/edit' , $stu->id)  }}" class="btn btn-info btn-sm">Edit</a>
+                                        <a href="{{ url('/del' , $stu->id)}}" class="btn btn-danger btn-sm">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
-
                     </table>
+                    {{ $students->links() }}
+
                 </div>
             </div>
         </div>
